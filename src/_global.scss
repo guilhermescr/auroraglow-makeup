@@ -1,0 +1,32 @@
+@use 'partials/variables';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: variables.$roboto-font;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+strong {
+  color: variables.$highlighted-text;
+}

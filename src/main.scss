@@ -1,0 +1,29 @@
+@use 'global';
+@use 'components/Main';
+@use 'components/Header';
+
+.body-video-background {
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
+
+  video {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+.open-search-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  img {
+    max-width: 30px;
+    width: 100%;
+  }
+}
