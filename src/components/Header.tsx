@@ -3,47 +3,140 @@ import SearchIcon from '../assets/icons/search-icon.svg';
 import { useState, useRef, useEffect } from 'react';
 
 export default function Header() {
-  const [isSearching, setIsSearching] = useState(false);
   const searchInput = useRef<HTMLInputElement>(null);
+  const headerElement = useRef<HTMLElement>(null);
+  const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  function handleResize() {
+    const headerWidth: number = headerElement.current?.clientWidth || 0;
+
+    setScreenWidth(headerWidth);
+  }
+
+  window.addEventListener('resize', handleResize);
 
   useEffect(() => {
-    if (isSearching) {
-      if (searchInput.current !== null) {
-        searchInput.current.focus();
+    function handleClickOutside({ target }: Event) {
+      const headerChildren = headerElement.current?.querySelectorAll(
+        '*'
+      ) as NodeListOf<Element>;
+      const isClickOutsideHeaderChildren =
+        [...headerChildren].filter(headerChild => headerChild === target)
+          .length === [].length;
+      const isHeaderNotClicked = target !== headerElement.current;
+
+      if (isHeaderNotClicked && isClickOutsideHeaderChildren) {
+        // clicked outside
+        document.removeEventListener('click', handleClickOutside);
+        setIsSearchBarOpen(false);
       }
     }
-  }, [isSearching]);
+
+    if (isSearchBarOpen && searchInput.current !== null) {
+      searchInput.current.focus();
+
+      document.addEventListener('click', handleClickOutside);
+    }
+  }, [isSearchBarOpen]);
 
   return (
-    <header className={`header ${isSearching && 'white-bg'}`}>
-      <img
-        className="auroraglow-logo"
-        src={AuroraGlowLogo}
-        alt="AuroraGlow Makeup Logo"
-      />
+    <header
+      ref={headerElement}
+      className={`header ${isSearchBarOpen ? 'white-bg' : ''}`.trim()}
+    >
+      {isSearchBarOpen && screenWidth <= 1024 && (
+        <section className="small-screen-search-bar-container">
+          <div className="search-container">
+            <button type="button">
+              <img
+                className="small-search-icon"
+                src={SearchIcon}
+                alt="Search Icon"
+              />
+            </button>
 
-      <div className="header__content">
-        <nav className="header__navbar">
-          <ul>
-            <li>Beauty Services</li>
-            <li>Gifts</li>
-            <li>Makeup</li>
-            <li>Skincare</li>
-            <li>Fragrances</li>
-            <li>Contact Us</li>
-          </ul>
-        </nav>
+            <input
+              type="search"
+              name="small-screen-search-input"
+              id="small-screen-search-input"
+              placeholder="Look for a makeup..."
+            />
 
-        <div className="search-bar" onClick={() => setIsSearching(true)}>
-          <button type="button" className="search-bar__search-button">
-            Search
+            <button
+              className="close-search-menu-button"
+              type="button"
+              onClick={() => setIsSearchBarOpen(false)}
+            >
+              <span className="close-search-menu-button__x-bar"></span>
+              <span className="close-search-menu-button__x-bar"></span>
+            </button>
+          </div>
+        </section>
+      )}
+
+      {screenWidth <= 1024 ? (
+        <>
+          <button
+            type="button"
+            className="small-screen-search-button"
+            onClick={() => setIsSearchBarOpen(true)}
+          >
+            <img
+              className="small-search-icon"
+              src={SearchIcon}
+              alt="Search Icon"
+            />
           </button>
 
-          <img src={SearchIcon} alt="Search Icon" />
-        </div>
-      </div>
+          <img
+            className="auroraglow-logo"
+            src={AuroraGlowLogo}
+            alt="AuroraGlow Makeup Logo"
+          />
 
-      {isSearching && (
+          <button className="hamburger-button">
+            <span className="hamburger-button__black-bar"></span>
+            <span className="hamburger-button__black-bar"></span>
+            <span className="hamburger-button__black-bar"></span>
+          </button>
+        </>
+      ) : (
+        <img
+          className="auroraglow-logo"
+          src={AuroraGlowLogo}
+          alt="AuroraGlow Makeup Logo"
+        />
+      )}
+
+      {screenWidth > 1024 && (
+        <div className="header__content">
+          <nav className="header__navbar">
+            <ul>
+              <li>Beauty Services</li>
+              <li>Gifts</li>
+              <li>Makeup</li>
+              <li>Skincare</li>
+              <li>Fragrances</li>
+              <li>Contact Us</li>
+            </ul>
+          </nav>
+
+          <div className="search-bar" onClick={() => setIsSearchBarOpen(true)}>
+            <button type="button" className="search-bar__search-button">
+              Search
+            </button>
+
+            <img
+              className="small-search-icon"
+              src={SearchIcon}
+              alt="Search Icon"
+            />
+          </div>
+        </div>
+      )}
+
+      {isSearchBarOpen && screenWidth > 1024 && (
         <section className="open-search-bar">
           <input
             type="search"
