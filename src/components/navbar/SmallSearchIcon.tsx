@@ -3,8 +3,9 @@ type Props = {
 };
 
 export default function SmallSearchIcon({ hasClasses = true }: Props) {
-  const renderSearchIcon = () => (
+  return (
     <svg
+      name="sm-openSearchIcon"
       className={`${hasClasses ? 'small-search-icon' : ''}`}
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -22,5 +23,4 @@ export default function SmallSearchIcon({ hasClasses = true }: Props) {
       </g>
     </svg>
   );
-  return <>{renderSearchIcon()}</>;
 }

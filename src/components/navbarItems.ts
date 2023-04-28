@@ -4,7 +4,7 @@ interface Item {
   children: Item[];
 }
 
-type NavbarItems = Item[];
+export type NavbarItems = Item[];
 
 export const navbarItems: NavbarItems = [
   {
