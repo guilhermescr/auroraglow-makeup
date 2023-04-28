@@ -1,12 +1,15 @@
 import AuroraGlowLogo from '../assets/imgs/auroraglow-makeup-logo.png';
-import SearchIcon from '../assets/icons/search-icon.svg';
 import { useState, useRef, useEffect } from 'react';
+import HeaderContent from './HeaderContent';
+import SmallSearchIcon from './navbar/SmallSearchIcon';
+import CloseMenuButton from './navbar/CloseMenuButton';
 
 export default function Header() {
   const searchInput = useRef<HTMLInputElement>(null);
   const headerElement = useRef<HTMLElement>(null);
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [isNavbarItemOpen, setIsNavbarItemOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   function handleResize() {
@@ -50,11 +53,7 @@ export default function Header() {
         <section className="small-screen-search-bar-container">
           <div className="search-container">
             <button type="button">
-              <img
-                className="small-search-icon"
-                src={SearchIcon}
-                alt="Search Icon"
-              />
+              <SmallSearchIcon />
             </button>
 
             <input
@@ -64,97 +63,176 @@ export default function Header() {
               placeholder="Look for a makeup..."
             />
 
-            <button
-              className="close-menu-button"
-              type="button"
-              onClick={() => setIsSearchBarOpen(false)}
-            >
-              <span className="close-menu-button__x-bar"></span>
-              <span className="close-menu-button__x-bar"></span>
-            </button>
+            <CloseMenuButton onclick={() => setIsSearchBarOpen(false)} />
           </div>
         </section>
       )}
 
       {screenWidth <= 1024 && isBurgerMenuOpen && (
         <section className="small-screen-navbar-container">
-          <div className="darker-background"></div>
-
-          <button
-            className="close-menu-button"
-            type="button"
+          <div
+            className="darker-background"
             onClick={() => setIsBurgerMenuOpen(false)}
-          >
-            <span className="close-menu-button__x-bar"></span>
-            <span className="close-menu-button__x-bar"></span>
-          </button>
+          ></div>
+
+          <CloseMenuButton onclick={() => setIsBurgerMenuOpen(false)} />
 
           <nav className="small-screen-navbar-container__navbar">
             {/* I'm going to change this key later... */}
             <ul>
-              <li key="sm-0">
+              <li className="navbar__item" key="sm-0">
                 <div className="topic">
                   <h3 className="topic__title">Beauty Services</h3>
 
-                  <span className="navbar__see-more">
-                    <span className="navbar-see-more__black-bar"></span>
-                    <span className="navbar-see-more__black-bar"></span>
-                  </span>
+                  {isNavbarItemOpen ? (
+                    <span
+                      className="navbar__see-less"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-less__black-bar"></span>
+                      <span className="navbar-see-less__black-bar"></span>
+                    </span>
+                  ) : (
+                    <span
+                      className="navbar__see-more"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-more__black-bar"></span>
+                      <span className="navbar-see-more__black-bar"></span>
+                    </span>
+                  )}
                 </div>
+
+                {isNavbarItemOpen && (
+                  <ul className="topic__options">
+                    <li className="topic topic-option">
+                      Skin Precision Analyzer
+                    </li>
+                    <li className="topic topic-option">Foundation Finder</li>
+                    <li className="topic topic-option">Virtual Try-On</li>
+                    <li className="topic topic-option">Fragrance Finder</li>
+                    <li className="topic topic-option">Olfactive Signature</li>
+                  </ul>
+                )}
               </li>
 
-              <li key="sm-1">
+              <li className="navbar__item" key="sm-1">
                 <div className="topic">
                   <h3 className="topic__title">Gifts</h3>
 
-                  <span className="navbar__see-more">
-                    <span className="navbar-see-more__black-bar"></span>
-                    <span className="navbar-see-more__black-bar"></span>
-                  </span>
+                  {isNavbarItemOpen ? (
+                    <span
+                      className="navbar__see-less"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-less__black-bar"></span>
+                      <span className="navbar-see-less__black-bar"></span>
+                    </span>
+                  ) : (
+                    <span
+                      className="navbar__see-more"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-more__black-bar"></span>
+                      <span className="navbar-see-more__black-bar"></span>
+                    </span>
+                  )}
                 </div>
               </li>
 
-              <li key="sm-2">
+              <li className="navbar__item" key="sm-2">
                 <div className="topic">
                   <h3 className="topic__title">Makeup</h3>
 
-                  <span className="navbar__see-more">
-                    <span className="navbar-see-more__black-bar"></span>
-                    <span className="navbar-see-more__black-bar"></span>
-                  </span>
+                  {isNavbarItemOpen ? (
+                    <span
+                      className="navbar__see-less"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-less__black-bar"></span>
+                      <span className="navbar-see-less__black-bar"></span>
+                    </span>
+                  ) : (
+                    <span
+                      className="navbar__see-more"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-more__black-bar"></span>
+                      <span className="navbar-see-more__black-bar"></span>
+                    </span>
+                  )}
                 </div>
               </li>
 
-              <li key="sm-3">
+              <li className="navbar__item" key="sm-3">
                 <div className="topic">
                   <h3 className="topic__title">Skincare</h3>
 
-                  <span className="navbar__see-more">
-                    <span className="navbar-see-more__black-bar"></span>
-                    <span className="navbar-see-more__black-bar"></span>
-                  </span>
+                  {isNavbarItemOpen ? (
+                    <span
+                      className="navbar__see-less"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-less__black-bar"></span>
+                      <span className="navbar-see-less__black-bar"></span>
+                    </span>
+                  ) : (
+                    <span
+                      className="navbar__see-more"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-more__black-bar"></span>
+                      <span className="navbar-see-more__black-bar"></span>
+                    </span>
+                  )}
                 </div>
               </li>
 
-              <li key="sm-4">
+              <li className="navbar__item" key="sm-4">
                 <div className="topic">
                   <h3 className="topic__title">Fragrances</h3>
 
-                  <span className="navbar__see-more">
-                    <span className="navbar-see-more__black-bar"></span>
-                    <span className="navbar-see-more__black-bar"></span>
-                  </span>
+                  {isNavbarItemOpen ? (
+                    <span
+                      className="navbar__see-less"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-less__black-bar"></span>
+                      <span className="navbar-see-less__black-bar"></span>
+                    </span>
+                  ) : (
+                    <span
+                      className="navbar__see-more"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-more__black-bar"></span>
+                      <span className="navbar-see-more__black-bar"></span>
+                    </span>
+                  )}
                 </div>
               </li>
 
-              <li key="sm-5">
+              <li className="navbar__item" key="sm-5">
                 <div className="topic">
                   <h3 className="topic__title">Contact Us</h3>
 
-                  <span className="navbar__see-more">
-                    <span className="navbar-see-more__black-bar"></span>
-                    <span className="navbar-see-more__black-bar"></span>
-                  </span>
+                  {isNavbarItemOpen ? (
+                    <span
+                      className="navbar__see-less"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-less__black-bar"></span>
+                      <span className="navbar-see-less__black-bar"></span>
+                    </span>
+                  ) : (
+                    <span
+                      className="navbar__see-more"
+                      onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
+                    >
+                      <span className="navbar-see-more__black-bar"></span>
+                      <span className="navbar-see-more__black-bar"></span>
+                    </span>
+                  )}
                 </div>
               </li>
             </ul>
@@ -169,11 +247,7 @@ export default function Header() {
             className="small-screen-search-button"
             onClick={() => setIsSearchBarOpen(true)}
           >
-            <img
-              className="small-search-icon"
-              src={SearchIcon}
-              alt="Search Icon"
-            />
+            <SmallSearchIcon />
           </button>
 
           <img
@@ -200,30 +274,7 @@ export default function Header() {
       )}
 
       {screenWidth > 1024 && (
-        <div className="header__content">
-          <nav className="header__navbar">
-            <ul>
-              <li key="lg-0">Beauty Services</li>
-              <li key="lg-1">Gifts</li>
-              <li key="lg-2">Makeup</li>
-              <li key="lg-3">Skincare</li>
-              <li key="lg-4">Fragrances</li>
-              <li key="lg-5">Contact Us</li>
-            </ul>
-          </nav>
-
-          <div className="search-bar" onClick={() => setIsSearchBarOpen(true)}>
-            <button type="button" className="search-bar__search-button">
-              Search
-            </button>
-
-            <img
-              className="small-search-icon"
-              src={SearchIcon}
-              alt="Search Icon"
-            />
-          </div>
-        </div>
+        <HeaderContent setIsSearchBarOpen={setIsSearchBarOpen} />
       )}
 
       {isSearchBarOpen && screenWidth > 1024 && (
@@ -236,7 +287,7 @@ export default function Header() {
             placeholder="Look For a Makeup..."
           />
 
-          <img src={SearchIcon} alt="Search Icon" />
+          <SmallSearchIcon hasClasses={false} />
         </section>
       )}
     </header>

@@ -1,4 +1,6 @@
 @use '../partials/mixins';
+@use 'navbar/SmallSearchIcon';
+@use 'navbar/CloseMenuButton';
 
 .header {
   background-color: transparent;
@@ -88,11 +90,6 @@
   background-color: #fff;
 }
 
-.small-search-icon {
-  max-width: 20px;
-  width: 100%;
-}
-
 @media (max-width: 1024px) {
   .header {
     flex-direction: row;
@@ -165,55 +162,23 @@
         width: 100%;
       }
 
-      .close-menu-button {
-        left: 25px;
-        position: absolute;
-        top: 5px;
-        transform: translateX(-50%);
-      }
-
       .small-screen-navbar-container__navbar {
         width: 100%;
 
         ul {
           width: 100%;
 
-          li {
-            border-bottom: 1px solid #ccc;
-            padding: 17px 20px;
+          .navbar__item {
             width: 100%;
 
             .topic {
-              align-items: center;
-              display: flex;
-              justify-content: space-between;
+              border-bottom: 1px solid #ccc;
+              padding: 17px 20px;
+            }
 
-              .topic__title {
-                font-size: 16px;
-                font-weight: 400;
-              }
-
-              .navbar__see-more {
-                cursor: pointer;
-                display: inline-block;
-                height: 20px;
-                position: relative;
-                width: 15px;
-
-                .navbar-see-more__black-bar {
-                  background-color: #000;
-                  cursor: pointer;
-                  height: 1px;
-                  left: 0;
-                  position: absolute;
-                  top: 50%;
-                  transform: translateY(-40%);
-                  width: 100%;
-
-                  &:nth-child(2) {
-                    transform: rotate(90deg);
-                  }
-                }
+            .topic__options {
+              .topic-option {
+                padding-left: 40px;
               }
             }
           }
@@ -230,9 +195,9 @@
       background-color: transparent;
       border: none;
       cursor: pointer;
-      height: 20px;
+      height: 18px;
       position: relative;
-      width: 30px;
+      width: 27px;
 
       .hamburger-button__black-bar {
         background-color: #000;
@@ -255,30 +220,57 @@
         }
       }
     }
+  }
 
-    .close-menu-button {
-      background-color: transparent;
-      border: none;
+  .topic {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    .topic__title {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .navbar__see-more {
       cursor: pointer;
-      height: 50px;
-      width: 25px;
+      display: inline-block;
+      height: 20px;
       position: relative;
+      width: 15px;
 
-      .close-menu-button__x-bar {
+      .navbar-see-more__black-bar {
         background-color: #000;
-        height: 1.4px;
+        cursor: pointer;
+        height: 1px;
         left: 0;
         position: absolute;
         top: 50%;
+        transform: translateY(-40%);
         width: 100%;
 
-        &:nth-child(1) {
-          transform: translateY(-50%) rotate(45deg);
-        }
-
         &:nth-child(2) {
-          transform: translateY(-50%) rotate(-45deg);
+          transform: rotate(90deg);
         }
+      }
+    }
+
+    .navbar__see-less {
+      cursor: pointer;
+      display: inline-block;
+      height: 20px;
+      position: relative;
+      width: 15px;
+
+      .navbar-see-less__black-bar {
+        background-color: #000;
+        cursor: pointer;
+        height: 1px;
+        left: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-40%);
+        width: 100%;
       }
     }
   }

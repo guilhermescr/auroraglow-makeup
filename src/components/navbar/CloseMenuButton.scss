@@ -1,0 +1,44 @@
+.header {
+  .close-menu-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    width: 25px;
+    position: relative;
+
+    .close-menu-button__x-bar {
+      background-color: #000;
+      height: 1.4px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+
+      &:nth-child(1) {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+  }
+
+  .small-screen-navbar-container {
+    .close-menu-button {
+      background-color: #000;
+      left: 25px;
+      max-width: 50px;
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      width: 100%;
+
+      .close-menu-button__x-bar {
+        background-color: #fff;
+        width: 25px;
+      }
+    }
+  }
+}
