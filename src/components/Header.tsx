@@ -6,6 +6,7 @@ export default function Header() {
   const searchInput = useRef<HTMLInputElement>(null);
   const headerElement = useRef<HTMLElement>(null);
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   function handleResize() {
@@ -64,14 +65,100 @@ export default function Header() {
             />
 
             <button
-              className="close-search-menu-button"
+              className="close-menu-button"
               type="button"
               onClick={() => setIsSearchBarOpen(false)}
             >
-              <span className="close-search-menu-button__x-bar"></span>
-              <span className="close-search-menu-button__x-bar"></span>
+              <span className="close-menu-button__x-bar"></span>
+              <span className="close-menu-button__x-bar"></span>
             </button>
           </div>
+        </section>
+      )}
+
+      {screenWidth <= 1024 && isBurgerMenuOpen && (
+        <section className="small-screen-navbar-container">
+          <div className="darker-background"></div>
+
+          <button
+            className="close-menu-button"
+            type="button"
+            onClick={() => setIsBurgerMenuOpen(false)}
+          >
+            <span className="close-menu-button__x-bar"></span>
+            <span className="close-menu-button__x-bar"></span>
+          </button>
+
+          <nav className="small-screen-navbar-container__navbar">
+            {/* I'm going to change this key later... */}
+            <ul>
+              <li key="sm-0">
+                <div className="topic">
+                  <h3 className="topic__title">Beauty Services</h3>
+
+                  <span className="navbar__see-more">
+                    <span className="navbar-see-more__black-bar"></span>
+                    <span className="navbar-see-more__black-bar"></span>
+                  </span>
+                </div>
+              </li>
+
+              <li key="sm-1">
+                <div className="topic">
+                  <h3 className="topic__title">Gifts</h3>
+
+                  <span className="navbar__see-more">
+                    <span className="navbar-see-more__black-bar"></span>
+                    <span className="navbar-see-more__black-bar"></span>
+                  </span>
+                </div>
+              </li>
+
+              <li key="sm-2">
+                <div className="topic">
+                  <h3 className="topic__title">Makeup</h3>
+
+                  <span className="navbar__see-more">
+                    <span className="navbar-see-more__black-bar"></span>
+                    <span className="navbar-see-more__black-bar"></span>
+                  </span>
+                </div>
+              </li>
+
+              <li key="sm-3">
+                <div className="topic">
+                  <h3 className="topic__title">Skincare</h3>
+
+                  <span className="navbar__see-more">
+                    <span className="navbar-see-more__black-bar"></span>
+                    <span className="navbar-see-more__black-bar"></span>
+                  </span>
+                </div>
+              </li>
+
+              <li key="sm-4">
+                <div className="topic">
+                  <h3 className="topic__title">Fragrances</h3>
+
+                  <span className="navbar__see-more">
+                    <span className="navbar-see-more__black-bar"></span>
+                    <span className="navbar-see-more__black-bar"></span>
+                  </span>
+                </div>
+              </li>
+
+              <li key="sm-5">
+                <div className="topic">
+                  <h3 className="topic__title">Contact Us</h3>
+
+                  <span className="navbar__see-more">
+                    <span className="navbar-see-more__black-bar"></span>
+                    <span className="navbar-see-more__black-bar"></span>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </section>
       )}
 
@@ -95,7 +182,10 @@ export default function Header() {
             alt="AuroraGlow Makeup Logo"
           />
 
-          <button className="hamburger-button">
+          <button
+            className="hamburger-button"
+            onClick={() => setIsBurgerMenuOpen(true)}
+          >
             <span className="hamburger-button__black-bar"></span>
             <span className="hamburger-button__black-bar"></span>
             <span className="hamburger-button__black-bar"></span>
@@ -113,12 +203,12 @@ export default function Header() {
         <div className="header__content">
           <nav className="header__navbar">
             <ul>
-              <li>Beauty Services</li>
-              <li>Gifts</li>
-              <li>Makeup</li>
-              <li>Skincare</li>
-              <li>Fragrances</li>
-              <li>Contact Us</li>
+              <li key="lg-0">Beauty Services</li>
+              <li key="lg-1">Gifts</li>
+              <li key="lg-2">Makeup</li>
+              <li key="lg-3">Skincare</li>
+              <li key="lg-4">Fragrances</li>
+              <li key="lg-5">Contact Us</li>
             </ul>
           </nav>
 
