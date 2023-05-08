@@ -1,6 +1,7 @@
+@use './PageSection';
+
 .main {
   min-height: calc(100vh - 143.42px);
-  padding: 20px;
-  // position: relative;
+  padding-block: 20px;
   width: 100%;
 }

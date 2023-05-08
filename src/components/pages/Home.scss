@@ -4,9 +4,9 @@
   .discover-container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 163.422px - 40px);
+    height: 72.1vh;
     justify-content: flex-end;
-    padding-bottom: 30px;
+    padding-bottom: 60px;
     padding-left: 60px;
     text-transform: uppercase;
 
@@ -39,7 +39,9 @@
     .discover-container {
       @include mixins.flex-center;
       flex-direction: column;
-      padding: 0;
+      height: calc(100vh - 83.89px - 20px);
+      padding-block: 0;
+      padding-inline: 5px;
       text-align: center;
     }
   }

@@ -185,6 +185,10 @@
                 padding-left: 40px;
               }
             }
+
+            .topic__options.closed {
+              display: none;
+            }
           }
         }
       }

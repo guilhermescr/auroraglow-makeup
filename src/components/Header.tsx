@@ -1,16 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
-import { NavbarItems, navbarItems } from './navbarItems';
+import { navbarItems } from './navbarItems';
 import HeaderContent from './HeaderContent';
 import SmallSearchIcon from './navbar/SmallSearchIcon';
 import CloseMenuButton from './navbar/CloseMenuButton';
 import AuroraGlowLogo from '../assets/imgs/auroraglow-makeup-logo.png';
+import NavbarItem from './navbar/NavbarItem';
 
 export default function Header() {
   const searchInput = useRef<HTMLInputElement>(null);
   const headerElement = useRef<HTMLElement>(null);
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-  const [isNavbarItemOpen, setIsNavbarItemOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   function handleResize() {
@@ -44,18 +44,6 @@ export default function Header() {
       document.addEventListener('click', handleClickOutside);
     }
   }, [isSearchBarOpen]);
-
-  function renderTopicOptions(topicChildren: NavbarItems) {
-    return (
-      <ul className="topic__options">
-        {topicChildren.map(({ title }) => (
-          <li className="topic topic-option" key={`sm-${title}`}>
-            {title}
-          </li>
-        ))}
-      </ul>
-    );
-  }
 
   return (
     <header
@@ -93,35 +81,12 @@ export default function Header() {
           <nav className="small-screen-navbar-container__navbar">
             <ul>
               {navbarItems.map(({ title, hasChildren, children }, index) => (
-                <li className="navbar__item" key={`sm-${index + 1}`}>
-                  <div className="topic">
-                    <h3 className="topic__title">{title}</h3>
-
-                    {hasChildren && isNavbarItemOpen && (
-                      <span
-                        className="navbar__see-less"
-                        onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
-                      >
-                        <span className="navbar-see-less__black-bar"></span>
-                        <span className="navbar-see-less__black-bar"></span>
-                      </span>
-                    )}
-
-                    {hasChildren && !isNavbarItemOpen && (
-                      <span
-                        className="navbar__see-more"
-                        onClick={() => setIsNavbarItemOpen(!isNavbarItemOpen)}
-                      >
-                        <span className="navbar-see-more__black-bar"></span>
-                        <span className="navbar-see-more__black-bar"></span>
-                      </span>
-                    )}
-                  </div>
-
-                  {hasChildren &&
-                    isNavbarItemOpen &&
-                    renderTopicOptions(children)}
-                </li>
+                <NavbarItem
+                  title={title}
+                  id={index + 1}
+                  hasChildren={hasChildren}
+                  itemChildren={children}
+                />
               ))}
             </ul>
           </nav>
